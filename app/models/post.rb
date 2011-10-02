@@ -1,6 +1,6 @@
 class Post < ActiveRecord::Base
-#  attr_accessor :content#, :parent, :user_id
-  attr_accessible :content, :parent#, :user_id
+#  attr_accessor :parent#:content#, :parent, :user_id
+#  attr_accessible :content#, :parent#, :user_id
 
   belongs_to :user
 
@@ -8,10 +8,13 @@ class Post < ActiveRecord::Base
 
   validates :user_id, :presence => true
 
-  def parent=(id)
-    self.parent = id
-  end
-
-
   default_scope :order => 'posts.created_at DESC'
+
+  public
+
+#    def set_parent(id)
+#      self.parent = id
+#    end
+
+
 end

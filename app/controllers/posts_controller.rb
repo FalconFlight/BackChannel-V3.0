@@ -1,6 +1,4 @@
 class PostsController < ApplicationController
-  attr_accessor :local_id
-
 
   def new
     @title = "New Post"
@@ -16,8 +14,9 @@ class PostsController < ApplicationController
   end
 
   def create
+    @post = Post.new
     @post = current_user.posts.build(params[:post])
-#    @post.parent= params[:parentid]
+    @post.parent = params[:parentid]
 
     if @post.save
       flash[:success] = "Successfully Posted!"
