@@ -8,7 +8,8 @@ class Post < ActiveRecord::Base
 
   validates :user_id, :presence => true
 
-  default_scope :order => 'posts.created_at DESC'
+#  default_scope :order => 'posts.created_at DESC',
+#                :limit => 100
 
   public
 

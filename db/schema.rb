@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111002012118) do
+ActiveRecord::Schema.define(:version => 20111002075802) do
 
   create_table "posts", :force => true do |t|
     t.string   "content"
@@ -33,5 +33,12 @@ ActiveRecord::Schema.define(:version => 20111002012118) do
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+
+  create_table "votes", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

@@ -7,6 +7,7 @@ BackChannelV1::Application.routes.draw do
   match '/signin',   :to => 'sessions#new'
   match '/signout',  :to => 'sessions#destroy'
   match '/newreply', :to => 'posts#newreply'
+  match '/show',     :to => 'votes#show'
 
   get "pages/home"
   get "pages/contact"

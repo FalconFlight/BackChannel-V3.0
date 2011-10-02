@@ -1,5 +1,10 @@
 class PostsController < ApplicationController
 
+  def index
+    
+  end
+
+
   def new
     @title = "New Post"
     @post = Post.new

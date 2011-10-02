@@ -1,18 +1,36 @@
-<h1> All posts go here </h1>
+<h1> All posts | 
+<strong><%= link_to "New Post", new_post_path %><br /></strong>
+</h1>
 <br />
 
-<% Post.all.each do |p| %>
-<strong>Post#<%= p.id%>  </strong><br />
-<b>Content:</b> <%= p.content %><br />
-<b>Author:</b>  <%= p.user_id %><br />
-<b>Parent:</b> <%= p.parent %> |  <%= display_parent(p) %><br />
+<% Post.find_all_by_parent(-1, :order => 'posts.created_at DESC').each do |p| %>
 
+<% if p.parent==-1 %>
+  <% type = "Post" %>
+<% else %>
+  <% type = "Reply" %>
+<% end %>
 
+<u><b><%="#{type}\# #{p.id}"%></b></u> <br />
+
+<b>Content</b>: <%= p.content %><br />
+<b>Author</b>:  <%= User.find(p.user_id).name %> <br />
+<%= link_to "Vote", posts_path%> |
 <%= link_to "Reply", newreply_path(:parentid => p.id) %>
 
 <br />
---------------------------------<br />
+<br /><b>REPLIES</b>:</br>
+<% Post.find_all_by_parent(p.id, :order => 'posts.created_at ASC').each do |reply| %>
+-------------------------------------<br />
+  <b><%="#{type}-id\# #{reply.id}:"%></b>  |  <%= link_to "Vote", posts_path%> 
+  <br />
+  <%= reply.content %><br />
+  <b>Parent</b>:  <%= display_parent(reply) %> ,
+  <b>Author</b>:  <%= User.find(reply.user_id).name %> 
+  <br />
+<% end %>
+================================================================
+<br />
 
 <% end %>
 
-<strong><%= link_to "New Post", new_post_path %><br /></strong>
