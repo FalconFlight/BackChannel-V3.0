@@ -3,7 +3,7 @@
 </h1>
 <br />
 
-<% Post.find_all_by_parent(-1, :order => 'posts.created_at DESC').each do |p| %>
+<% Post.find_all_by_parent(-1, :order => 'posts.weight DESC').each do |p| %>
 
 <% if p.parent==-1 %>
   <% type = "Post" %>
@@ -11,22 +11,26 @@
   <% type = "Reply" %>
 <% end %>
 
-<u><b><%="#{type}\# #{p.id}"%></b></u> <br />
+<u><b><%="Post #{p.id}"%></b></u> <br />
 
-<b>Content</b>: <%= p.content %><br />
+<%= p.content %><br />
 <b>Author</b>:  <%= User.find(p.user_id).name %> <br />
-<%= link_to "Vote", posts_path%> |
+<b>Weight</b>:  <%= Post.find(p.id).weight %> <br />
+
+<%= link_to "Vote", newvote_path(:postid_from_page => p.id, :userid_from_page => current_user.id) %> |
 <%= link_to "Reply", newreply_path(:parentid => p.id) %>
 
 <br />
 <br /><b>REPLIES</b>:</br>
 <% Post.find_all_by_parent(p.id, :order => 'posts.created_at ASC').each do |reply| %>
 -------------------------------------<br />
-  <b><%="#{type}-id\# #{reply.id}:"%></b>  |  <%= link_to "Vote", posts_path%> 
+  <b><%="ReplyID- #{reply.id}:"%></b>  |  <%= link_to "Vote", newvote_path(:postid_from_page => reply.id, :userid_from_page => current_user.id)%> 
   <br />
   <%= reply.content %><br />
   <b>Parent</b>:  <%= display_parent(reply) %> ,
-  <b>Author</b>:  <%= User.find(reply.user_id).name %> 
+  <b>Author</b>:  <%= User.find(reply.user_id).name %>, 
+  <b>Weight</b>:  <%= Post.find(reply.id).weight %> <br />
+
   <br />
 <% end %>
 ================================================================
