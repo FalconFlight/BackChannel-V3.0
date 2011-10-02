@@ -1,0 +1,18 @@
+<h1> All posts go here </h1>
+<br />
+
+<% Post.all.each do |p| %>
+<strong>Post#<%= p.id%>  </strong><br />
+<b>Content:</b> <%= p.content %><br />
+<b>Author:</b>  <%= p.user_id %><br />
+<b>Parent:</b> <%= p.parent %> |  <%= display_parent(p) %><br />
+
+
+<%= link_to "Reply", newreply_path(:parentid => p.id) %>
+
+<br />
+--------------------------------<br />
+
+<% end %>
+
+<strong><%= link_to "New Post", new_post_path %><br /></strong>

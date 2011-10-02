@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       render 'new'
     else
       sign_in user
-      redirect_to user # user_path(user)
+      redirect_back_or posts_path # user_path(user)
     end
   end
 
