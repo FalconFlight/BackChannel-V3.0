@@ -22,6 +22,12 @@ class PostsController < ApplicationController
     @post = Post.new
     @post = current_user.posts.build(params[:post])
     @post.parent = params[:parentid]
+  
+    if(@post.parent == -1)
+      @post.weight = Post.find_all_by_parent(-1).count
+    else
+      @post.weight = 0
+    end
 
     if @post.save
       flash[:success] = "Successfully Posted!"
