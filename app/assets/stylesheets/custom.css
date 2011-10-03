@@ -99,6 +99,15 @@ div p {
 
 /* Sign up button */
 
+label.label_new_user {
+  font-size: 110%;
+  left: 420px;
+  top: -20px;
+  font-weight: normal;       
+  position: relative;       
+}
+
+
 a.signup_button {
   float: right;
   margin-left: auto;
@@ -113,10 +122,17 @@ a.signup_button {
   font-weight: bold;
   padding: 20px;
   left: -30px;
-  top: 40px;
+  top: 10px;
   position: relative
 }
 
+label.label_guest_user {
+  font-size: 100%;
+  left: 200px;
+  top: 120px;
+  font-weight: normal;       
+  position: relative;       
+}
 
 a.guest_browse {
   float: right;           
@@ -129,10 +145,16 @@ a.guest_browse {
   background: #0066CC;
   font-size: 100%;
   font-weight: bold;
-  padding: 0px;
-  left: 200px;
-  top: 140px;
+  padding: 1px;
+  left: 201px;
+  top: 125px;
   position: relative
+}
+
+/* Admin account radio button label*/
+
+label.admin_radio_label {
+  font-weight: normal;
 }
 
 /* Round corners */

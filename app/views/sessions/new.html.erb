@@ -1,11 +1,15 @@
-<h1>Welcome to the Backhannel App!</h1>
+<h1>Sign In </h1>
 
+<label class = "label_new_user" >
+<%= "New User? Create an Account." %>
+</label>
 <%= link_to "Sign up now!", signup_path(:user_type => "regular"), :class => "signup_button round" %>
-<br />
+<label class = "label_guest_user" >
+<%= "Don't want to create an Account?" %>
+</label>
 <%= link_to "Browse as Guest", signup_path(:user_type => "guest"), :class => "guest_browse round" %>
 
 
-<h1>Sign in</h1>
 
 <%= form_for(:session, :url => sessions_path) do |f| %>
   <div class="field">

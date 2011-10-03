@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  
 
   def index
     
@@ -40,6 +41,27 @@ class PostsController < ApplicationController
   end
 
   def delete
+    @post = Post.find(params[:post_id])
+    # delete all entries in votes table with post_id = this
+    votes = Vote.find_all_by_post_id(@post.id)
+    votes.each do |v|
+      v.destroy
+    end
+
+    # destroy all replies to this post
+    replies = Post.find_all_by_parent(@post.id)
+
+    replies.each do |r|
+      # destroy all votes to this reply
+      votes = Vote.find_all_by_post_id(r.id)
+      votes.each do |v|
+        v.destroy
+      end
+      r.destroy
+    end
+
+    @post.destroy
+
     render 'index'
   end
 
