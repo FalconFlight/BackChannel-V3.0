@@ -10,14 +10,33 @@ class UsersController < ApplicationController
   def new
     @user  = User.new
     @title = "Sign Up"
+
+    if(params[:user_type] == "guest")
+      #TODO construct dummy user with type guest
+      sign_in create_guest_user
+      # save it in the cookie
+      flash[:success] = "Welcome to BackChannel App!"
+      redirect_to posts_path and return
+    else
+      render 'new'
+    end
+
   end
 
   def create
     @user = User.new(params[:user])
+
+    if params[:user_type_from_button] == "admin"
+      @user.account_type = "admin"
+    else
+      @user.account_type = "regular"
+    end
+
+
     if @user.save
       sign_in @user
       flash[:success] = "Welcome to BackChannel App!"
-      redirect_to posts_path # user_path(@user)
+      redirect_to posts_path 
     else
       @title = "Sign up"
       render 'new'
@@ -25,12 +44,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-#    @user  = User.find(params[:id])
     @title = "Edit User"
   end
 
+# Currently not implemented
   def update
-#    @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
       flash[:success] = "Profile Updated."
       redirect_to user_path(@user)

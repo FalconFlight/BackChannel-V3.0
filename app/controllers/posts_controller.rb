@@ -39,5 +39,12 @@ class PostsController < ApplicationController
     end
   end
 
+  def delete
+    render 'index'
+  end
+
+  def show
+    render 'index'
+  end
 
 end

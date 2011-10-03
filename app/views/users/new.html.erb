@@ -22,6 +22,12 @@
     <%= f.password_field :password_confirmation %>
   </div>
 
+  <div>
+    <% if User.find_all_by_account_type("admin").count == 0 %>
+      <%= radio_button_tag :user_type_from_button, "admin" %> Create an Admin Account
+    <% end %>
+  </div>
+<br />
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>

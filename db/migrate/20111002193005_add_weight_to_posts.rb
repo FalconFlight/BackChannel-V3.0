@@ -5,5 +5,7 @@ class AddWeightToPosts < ActiveRecord::Migration
   end
 
   def self.down
+    remove_column :posts, :weight
+    remove_index :posts, :weight
   end
 end

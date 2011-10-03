@@ -52,6 +52,7 @@ nav {
   background-color: white;
   padding: 0 0.7em;
   white-space: nowrap;
+  text-align: center;
 }
 
 nav ul {
@@ -62,7 +63,7 @@ nav ul {
 nav ul li {
   list-style-type: none;
   display: inline-block;
-  padding: 0.2em 0;
+  padding: 0.4em 0;
 }
 
 nav ul li a {
@@ -71,19 +72,39 @@ nav ul li a {
 }
 
 nav ul li a:visited {
-  color: #09c;
+  color: #04c;
 }
 
 nav ul li a:hover {
   text-decoration: underline;
 }
 
+nav div p {
+    margin: 0 0px;
+    padding: 0.3em 0;
+    font-size: 110%;             
+    font-weight: bold;
+    color: #09f;
+    display: inline-block;
+}
+
+div p {
+    margin: 0 0px;
+    padding: 0.3em 0;
+    font-size: 110%;             
+    font-weight: bold;
+    color: #09f;
+    display: inline-block;
+}
+
 /* Sign up button */
 
 a.signup_button {
+  float: right;
   margin-left: auto;
   margin-right: auto;
-  display: block;
+  margin-top: auto;
+  display: inline-block;
   text-align: center;
   width: 190px;
   color: #fff;
@@ -91,6 +112,27 @@ a.signup_button {
   font-size: 150%;
   font-weight: bold;
   padding: 20px;
+  left: -30px;
+  top: 40px;
+  position: relative
+}
+
+
+a.guest_browse {
+  float: right;           
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+  text-align: center;
+  width: 230px;
+  color: #fff;
+  background: #0066CC;
+  font-size: 100%;
+  font-weight: bold;
+  padding: 0px;
+  left: 200px;
+  top: 140px;
+  position: relative
 }
 
 /* Round corners */
@@ -115,17 +157,24 @@ footer nav {
     float: none;
 }
 
+
+/* post home page */
+h1 strong {
+  font-size: 50%;
+}
+
 /* sign up form */
 div.field, div.actions {
     margin-bottom: 10px;
 }
 
+
 /*  Error Messages  */
 .field_with_errors {
     margin-top: 10px;
-      padding: 2px;
-                 background-color: red;
-                   display: table;
+    padding: 2px;
+    background-color: red;
+    display: table;
 }
 
 .field_with_errors label {
@@ -133,12 +182,12 @@ div.field, div.actions {
 }
 
 #error_explanation {
-    width: 400px;
-             border: 2px solid red;
-                       padding: 7px;
-                                  padding-bottom: 12px;
-                                    margin-bottom: 20px;
-                                      background-color: #f0f0f0;
+	width: 400px;
+	border: 2px solid red;
+	padding: 7px;
+	padding-bottom: 12px;
+	margin-bottom: 20px;
+	background-color: #f0f0f0;
 }
 
 #error_explanation h2 {

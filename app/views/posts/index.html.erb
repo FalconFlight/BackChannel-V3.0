@@ -1,5 +1,10 @@
-<h1> All posts | 
-<strong><%= link_to "New Post", new_post_path %><br /></strong>
+<h1> All posts
+<% if current_user.account_type !="guest" %>
+ |
+  <strong>
+  <%= link_to "Write a New Post", new_post_path %><br />
+  </strong>
+<% end %>
 </h1>
 <br />
 
@@ -17,14 +22,26 @@
 <b>Author</b>:  <%= User.find(p.user_id).name %> <br />
 <b>Weight</b>:  <%= Post.find(p.id).weight %> <br />
 
-<%= link_to "Vote", newvote_path(:postid_from_page => p.id, :userid_from_page => current_user.id) %> |
-<%= link_to "Reply", newreply_path(:parentid => p.id) %>
+<% if current_user.account_type != "guest" %>
+  <%= link_to "Vote", newvote_path(:postid_from_page => p.id, :userid_from_page => current_user.id) %> |
+  <%= link_to "Reply", newreply_path(:parentid => p.id) %> |
+  <% if current_user.account_type == "admin" || current_user.id == p.user_id %>
+    <%= link_to "Destroy", removepost_path(p) %>
+  <% end %>
+<% end %>
 
 <br />
 <br /><b>REPLIES</b>:</br>
 <% Post.find_all_by_parent(p.id, :order => 'posts.created_at ASC').each do |reply| %>
 -------------------------------------<br />
-  <b><%="ReplyID- #{reply.id}:"%></b>  |  <%= link_to "Vote", newvote_path(:postid_from_page => reply.id, :userid_from_page => current_user.id)%> 
+  <b><%="ReplyID- #{reply.id}:"%></b>  | 
+  <% if current_user.account_type != "guest" %>
+    <%= link_to "Vote", newvote_path(:postid_from_page => reply.id, :userid_from_page => current_user.id)%> |
+      <% if current_user.account_type == "admin" || current_user.id == reply.user_id %>
+        <%= link_to "Destroy", removepost_path(reply) %>
+      <% end %>
+  <% end %>
+
   <br />
   <%= reply.content %><br />
   <b>Parent</b>:  <%= display_parent(reply) %> ,

@@ -1,4 +1,5 @@
 module SessionsHelper
+include UsersHelper
 
   def sign_in(user)
     cookies.permanent.signed[:remember_token] = [user.id, user.salt]
@@ -39,7 +40,13 @@ module SessionsHelper
   end
 
   def current_user
-    @current_user ||= user_from_remember_token
+    if(!@current_user.nil?)
+      @current_user 
+    elsif(remember_token[0] ==-1) 
+      @current_user = create_guest_user
+    else
+      user_from_remember_token
+    end
   end
 
   private

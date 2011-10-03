@@ -9,7 +9,7 @@ BackChannelV1::Application.routes.draw do
   match '/newreply', :to => 'posts#newreply'
   match '/showvote', :to => 'votes#show'
   match '/newvote',  :to => 'votes#new'
-
+  match '/removepost', :to => 'posts#delete'
 
   get "pages/home"
   get "pages/contact"
@@ -67,7 +67,7 @@ BackChannelV1::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'pages#home'
+  root :to => 'sessions#new'
 
   # See how all your routes lay out with "rake routes"
 
