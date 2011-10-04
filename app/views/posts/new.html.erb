@@ -1,21 +1,22 @@
 <% if @parent_id==-1 %>
-  <h1>Submit a new Post</h1>
-  <% type = "Post" %>
+    <h1>Submit a new Post</h1>
+    <% type = "Post" %>
 <% else %>
-  <h1>Write a Reply to <%= @parent_id %></h1>
-  <% type = "Reply" %>
+    <h1>Write a Reply to Post: </h1>
+    '<%= Post.find(@parent_id).content %>'
+    <% type = "Reply" %>
 <% end %>
+<br />
 
 <%= form_for(:post, :url => posts_path) do |f| %>
-  <div class="field">
-    <%= render 'shared/error_messages', :object => f.object %>
-    <%= hidden_field_tag :parentid, @parent_id  %>
-    <%= f.label :content %><br />
-    <%= f.text_area :content %>
-  </div>
+    <div class="field">
+      <%= render 'shared/error_messages', :object => f.object %>
+      <%= hidden_field_tag :parentid, @parent_id  %>
+      <%= f.text_area :content %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Submit #{type}" %>
-  </div>
+    <div class="actions">
+      <%= f.submit "Submit #{type}" %>
+    </div>
 <% end %>
 
