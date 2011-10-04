@@ -1,11 +1,17 @@
 <header>
+
   <% logo = image_tag("backchannel_logo2.png", :alt => "BackChannel App V 1.0", :class => "round") %>
-  <%= link_to logo, root_path %>
+  <% if signed_in? %>
+      <%= link_to logo, posts_path %>
+  <% else %>
+      <%= link_to logo, root_path %>
+  <% end %>
+
 
   <nav class="round">
     <div>
       <% if !current_user.nil? %>
-        <p>Welcome <%= current_user.name.capitalize %>! Type: <%= current_user.account_type %> </p>
+        <p>Welcome <%= current_user.name.capitalize %>!</p>
       <% end %>
     </div>
 
@@ -14,12 +20,17 @@
         <li><%= link_to "Home", posts_path %></li>
       <% end %>
 
+      <% if signed_in? %>
+        <% if current_user.account_type == "admin" %>
+          <li><%= link_to "Manage Accounts", users_path %></li>
+        <% end %>
+      <% end %>
+
+
       <li><%= link_to "Help", help_path %></li>
 
       <% if signed_in? %>
         <li><%= link_to "Sign out", signout_path, :method => :delete %></li>
-      <% else %>
-        <li><%= link_to "Sign in", signin_path %></li>
       <% end %>
     </ul>
   </nav>

@@ -1,4 +1,5 @@
 BackChannelV1::Application.routes.draw do
+
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
   resources :posts#, :only => [:new, :create]
@@ -9,7 +10,10 @@ BackChannelV1::Application.routes.draw do
   match '/newreply', :to => 'posts#newreply'
   match '/showvote', :to => 'votes#show'
   match '/newvote',  :to => 'votes#new'
-  match '/removepost', :to => 'posts#delete'
+  match '/removepost',  :to => 'posts#delete'
+  match '/newadmin',    :to => 'users#newadmin'
+  match '/removeuser',  :to => 'users#delete'
+  match '/search',      :to => 'posts#search'
 
   get "pages/home"
   get "pages/contact"

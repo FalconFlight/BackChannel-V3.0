@@ -8,7 +8,8 @@ class User < ActiveRecord::Base
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   validates :name,  :presence => true,
-                    :length   => { :maximum => 50 }
+                    :length   => { :maximum => 50 },
+                    :uniqueness => { :case_sensitive => false }
 
   validates :email, :presence   => true,
                     :format     => { :with => email_regex },
@@ -43,8 +44,10 @@ class User < ActiveRecord::Base
   private
 
     def encrypt_password
-      self.salt = make_salt unless has_password?(password)
-      self.encrypted_password = encrypt(password) #password is local not in db
+      if self.encrypted_password.nil?
+        self.salt = make_salt #unless has_password?(password)
+        self.encrypted_password = encrypt(password) #password is local not in db
+      end
     end
     
     def encrypt(string)

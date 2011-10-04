@@ -1,57 +1,80 @@
-<h1> All posts
-<% if current_user.account_type !="guest" %>
- |
-  <strong>
-  <%= link_to "Write a New Post", new_post_path %><br />
-  </strong>
+<b>SEARCH:</b>
+<%= form_for(:post, :url => search_path) do |f| %>
+    <div class="field">
+      <%= render 'shared/error_messages', :object => f.object %>
+
+      <%= text_field_tag :search_string %>
+      <div>
+        <%= radio_button_tag :search_type, "user", :checked => true %> Search by Author
+        <%= radio_button_tag :search_type, "posts" %> Search by Posts
+      </div>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Search" %>
+    </div>
 <% end %>
+
+<br />
+<br />
+
+
+<h1> All posts
+  <% if current_user.account_type !="guest" %>
+      |
+      <strong>
+        <%= link_to "Write a New Post", new_post_path %><br />
+      </strong>
+  <% end %>
 </h1>
 <br />
 
 <% Post.find_all_by_parent(-1, :order => 'posts.weight DESC').each do |p| %>
 
-<% if p.parent==-1 %>
-  <% type = "Post" %>
-<% else %>
-  <% type = "Reply" %>
-<% end %>
+    <% if p.parent==-1 %>
+        <% type = "Post" %>
+    <% else %>
+        <% type = "Reply" %>
+    <% end %>
 
-<u><b><%="Post #{p.id}"%></b></u> <br />
+    <u><b><%="Post #{p.id}"%></b></u> <br />
 
-<%= p.content %><br />
-<b>Author</b>:  <%= User.find(p.user_id).name %> <br />
-<b>Weight</b>:  <%= Post.find(p.id).weight %> <br />
+    <%= p.content %><br />
+    <b>Author</b>:  <%= User.find(p.user_id).name %> <br />
+    <b>Weight</b>:  <%= Post.find(p.id).weight %> <br />
+    <b>Votes</b>: <%= Vote.find_all_by_post_id(p.id).count %> <br />
 
-<% if current_user.account_type != "guest" %>
-  <%= link_to "Vote", newvote_path(:postid_from_page => p.id, :userid_from_page => current_user.id) %> |
-  <%= link_to "Reply", newreply_path(:parentid => p.id) %> |
-  <% if current_user.account_type == "admin" || current_user.id == p.user_id %>
-    <%= link_to "Destroy", removepost_path(:post_id => p.id), :confirm => "Are you sure?" %>
-  <% end %>
-<% end %>
+    <% if current_user.account_type != "guest" %>
+        <%= link_to "Vote", newvote_path(:postid_from_page => p.id, :userid_from_page => current_user.id) %> |
+        <%= link_to "Reply", newreply_path(:parentid => p.id) %> |
+        <% if current_user.account_type == "admin" || current_user.id == p.user_id %>
+            <%= link_to "Destroy", removepost_path(:post_id => p.id), :confirm => "Are you sure?" %>
+        <% end %>
+    <% end %>
 
-<br />
-<br /><b>REPLIES</b>:</br>
-<% Post.find_all_by_parent(p.id, :order => 'posts.created_at ASC').each do |reply| %>
--------------------------------------<br />
-  <b><%="ReplyID- #{reply.id}:"%></b>  | 
-  <% if current_user.account_type != "guest" %>
-    <%= link_to "Vote", newvote_path(:postid_from_page => reply.id, :userid_from_page => current_user.id)%> |
-      <% if current_user.account_type == "admin" || current_user.id == reply.user_id %>
-        <%= link_to "Destroy", removepost_path(:post_id => reply.id), :confirm => "Are you sure?" %>
-      <% end %>
-  <% end %>
+    <br />
+    <br /><b>REPLIES</b>:</br>
+    <% Post.find_all_by_parent(p.id, :order => 'posts.created_at ASC').each do |reply| %>
+        -------------------------------------<br />
+        <b><%="ReplyID- #{reply.id}:"%></b>  |
+        <% if current_user.account_type != "guest" %>
+            <%= link_to "Vote", newvote_path(:postid_from_page => reply.id, :userid_from_page => current_user.id)%> |
+            <% if current_user.account_type == "admin" || current_user.id == reply.user_id %>
+                <%= link_to "Destroy", removepost_path(:post_id => reply.id), :confirm => "Are you sure?" %>
+            <% end %>
+        <% end %>
 
-  <br />
-  <%= reply.content %><br />
-  <b>Parent</b>:  <%= display_parent(reply) %> ,
-  <b>Author</b>:  <%= User.find(reply.user_id).name %>, 
-  <b>Weight</b>:  <%= Post.find(reply.id).weight %> <br />
+        <br />
+        <%= reply.content %><br />
+        <b>Parent</b>:  <%= display_parent(reply) %> ,
+        <b>Author</b>:  <%= User.find(reply.user_id).name %>,
+        <b>Weight</b>:  <%= Post.find(reply.id).weight %> <br />
+        <b>Votes</b>:   <%= Vote.find_all_by_post_id(reply.id).count %> <br />
 
-  <br />
-<% end %>
-================================================================
-<br />
+        <br />
+    <% end %>
+    ================================================================
+    <br />
 
 <% end %>
 

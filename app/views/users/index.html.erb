@@ -1,0 +1,26 @@
+<h2>List of all Users</h2>
+
+<br/>
+<%= link_to "Create new Admin Account", newadmin_path %>
+<br/>
+<br/>
+<br/>
+UserName | Email | Account Tyep | Total Posts authored | Total Replies authored | Total Votes received
+<br/>
+<br/>
+<% @all_users.each do |each_user| %>
+
+    <%= each_user.name %> |
+    <%= each_user.email %> |
+    <%= each_user.account_type.capitalize %> |
+    <%= all_posts = Post.find_all_by_user_id_and_parent(each_user.id, -1).count %>
+    [<%= link_to "View", search_path(:searched_from => "admin_console", :search_type => "user", :search_string => each_user.name) %>] |
+    <%= total_replies_authored(each_user.id, all_posts) %>
+    |
+    <%= each_user.total_votes%> |
+    <%= link_to "", removeuser_path(:user_id => each_user.id), :confirm => "Are you sure?" %>
+
+    <%= link_to "Destroy User", removeuser_path(:user_id => each_user.id), :confirm => "Are you sure?" %>
+
+    <br/>
+<% end  %>

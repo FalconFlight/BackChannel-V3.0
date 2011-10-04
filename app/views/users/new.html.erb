@@ -25,10 +25,20 @@
   <div>
     <% if User.find_all_by_account_type("admin").count == 0 %>
       <%= radio_button_tag :user_type_from_button, "admin" %> Create an Admin Account
+    <% elsif @acc_type == "admin" %>
+      <%= hidden_field_tag :user_type_admin, "admin" %>
     <% end %>
   </div>
-<br />
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
+
+  <br />
+
+  <% if @acc_type == "admin" %>
+    <div class="actions">
+      <%= f.submit "Create Admin" %>
+    </div>
+  <% else%>
+    <div class="actions">
+      <%= f.submit "Sign up" %>
+    </div>
+  <% end %>
 <% end %>
