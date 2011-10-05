@@ -498,3 +498,44 @@ div.field, div.actions {
     font-weight: boldr;
     font-size: 120%;
 }
+
+.view_posts_admin {
+     padding: 3px;
+    float: right;
+    display: inline-block;
+    width: 60px;
+    background: #88cffe;
+    font-weight: bold;
+    font-size: 70%;
+    color: #205aa5;
+    text-align:center;
+    /*left: -05px;*/
+    /*top: -30px;*/
+    /*position: relative*/
+}
+
+.delete_user_admin {
+    padding: 2px;
+    float: right;
+    display: inline-block;
+    width: 60px;
+    background: #b61c1c;
+    font-weight: bold;
+    font-size: 80%;
+    color: #fbd4d3;
+    text-align:center;
+    /*left: -05px;*/
+    /*top: -30px;*/
+    /*position: relative*/
+}
+
+.manage_accounts_table {
+    /*text-align: right;*/
+    /*width: 100%;*/
+}
+
+table,th, td
+{
+    text-align: center;
+border: 1px solid #162f5b;
+}

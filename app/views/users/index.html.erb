@@ -10,24 +10,33 @@
 
     <%= link_to "Create new Admin Account", newadmin_path, :class => "hyperlink round" %>
     <br/>
-    UserName | Email | Account Tyep | Total Posts authored | Total Replies authored | Total Votes received
-    <br/>
-    <br/>
-    <% @all_users.each do |each_user| %>
 
-        <%= each_user.name %> |
-        <%= each_user.email %> |
-        <%= each_user.account_type.capitalize %> |
-        <%= all_posts = Post.find_all_by_user_id_and_parent(each_user.id, -1).count %>
-        [<%= link_to "View Posts", search_path(:searched_from => "admin_console", :search_type => "user", :search_string => each_user.name) %>] |
-        <%= total_replies_authored(each_user.id, all_posts) %>
-        |
-        <%= each_user.total_votes%> |
-        <%= link_to "", removeuser_path(:user_id => each_user.id), :confirm => "Are you sure?" %>
+    <table border="1" class="manage_accounts_table" >
+      <tr>
+        <b>
+        <td><b>User Name</b></td>
+        <td><b>Email</b></td>
+        <td><b>Account Type</b></td>
+        <td><b>Total Posts authored</b></td>
+        <td><b>Total Replies authored</b></td>
+        <td><b>Total Votes received</b></td>
+        <td ><b>Action</b></td>
+        </b>
+      </tr>
+      <% @all_users.each do |each_user| %>
+          <tr >
+            <td><%= each_user.name %></td>
+            <td><%= each_user.email %></td>
+            <td><%= each_user.account_type.capitalize %></td>
+            <td><%= all_posts = Post.find_all_by_user_id_and_parent(each_user.id, -1).count %>
+              <%= link_to "View Posts", search_path(:searched_from => "admin_console", :search_type => "user", :search_string => each_user.name), :class => "view_posts_admin round" %></td>
+            <td><%= total_replies_authored(each_user.id, all_posts) %></td>
+            <td><%= each_user.total_votes%></td>
+            <td ><%= link_to "Delete User", removeuser_path(:user_id => each_user.id), :confirm => "Are you sure?", :class => "delete_user_admin round"  %></td>
+          </tr >
 
-        <%= link_to "Delete User", removeuser_path(:user_id => each_user.id), :confirm => "Are you sure?" %>
+      <% end  %>
+    </table>
 
-        <br/>
-    <% end  %>
 <% end  %>
 
