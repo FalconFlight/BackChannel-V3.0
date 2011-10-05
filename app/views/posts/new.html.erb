@@ -1,22 +1,37 @@
-<% if @parent_id==-1 %>
-    <h1>Submit a new Post</h1>
-    <% type = "Post" %>
+<% if current_user.nil? %>
+    <div class="flash error">You do not have permissions to access this page!</div>
+    <%= link_to "Back to Homepage", root_path %>
+<% elsif current_user.account_type == "guest" %>
+    <div class="flash error">You do not have permissions to access this page!</div>
+    <%= link_to "Back to Posts Homepage", posts_path %>
 <% else %>
-    <h1>Write a Reply to Post: </h1>
-    '<%= Post.find(@parent_id).content %>'
-    <% type = "Reply" %>
-<% end %>
-<br />
 
-<%= form_for(:post, :url => posts_path) do |f| %>
-    <div class="field">
-      <%= render 'shared/error_messages', :object => f.object %>
-      <%= hidden_field_tag :parentid, @parent_id  %>
-      <%= f.text_area :content %>
-    </div>
+    <% if @parent_id==-1 %>
+        <h1>Submit a new Post</h1>
+        <% type = "Post" %>
+    <% else %>
+        <h1>Write a Reply to Post: </h1>
+          <div class="post_content c5">
+            <%= Post.find(@parent_id).content %>
+            <%= %>
+          </div>
 
-    <div class="actions">
-      <%= f.submit "Submit #{type}" %>
-    </div>
+
+        <% type = "Reply" %>
+    <% end %>
+    <br />
+
+    <%= form_for(:post, :url => posts_path) do |f| %>
+        <div class="field">
+          <%= render 'shared/error_messages', :object => f.object %>
+          <%= hidden_field_tag :parentid, @parent_id  %>
+          <%= f.text_area :content, :class => "reply_area" %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Submit #{type}", :class => "submit_post" %>
+        </div>
+        <%= link_to "Cancel", posts_path, :class => "cancel round" %>
+    <% end %>
 <% end %>
 

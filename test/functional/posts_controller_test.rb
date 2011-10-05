@@ -6,4 +6,7 @@ class PostsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should use layout"
+
+
 end

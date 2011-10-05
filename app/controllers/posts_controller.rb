@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   
 
   def index
+    @title = "All Posts"
   end
 
 
@@ -19,6 +20,7 @@ class PostsController < ApplicationController
   end
 
   def create
+    @title = "All Posts"
     @post = Post.new
     @post = current_user.posts.build(params[:post])
     @post.parent = params[:parentid]
@@ -30,16 +32,15 @@ class PostsController < ApplicationController
     end
 
     if @post.save
-      flash[:success] = "Successfully Posted!"
-      redirect_to posts_path
+      flash[:info] = "Successfully Posted!"
     else
       flash[:error] = "Unsuccessful attempt. Try Again."
-      @title = "Submit Post/Reply"
-      render 'new'
     end
+    redirect_to posts_path
   end
 
   def delete
+    @title = "All Posts"
     @post = Post.find(params[:post_id])
     # delete all entries in votes table with post_id = this
     votes = Vote.find_all_by_post_id(@post.id)
@@ -59,17 +60,19 @@ class PostsController < ApplicationController
       r.destroy
     end
 
+    flash[:info] = "Post Deleted!"
     @post.destroy
-
     render 'index'
   end
 
   def show
+    @title = "All Posts"
     render 'index'
   end
 
 
   def search
+    @title = "Search Results"
     if params[:search_string].blank?
       flash[:error] = "Cannot have an empty Search Field!"
       redirect_to posts_path and return

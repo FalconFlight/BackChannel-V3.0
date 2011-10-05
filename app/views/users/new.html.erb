@@ -1,44 +1,55 @@
-<h1>Sign up</h1>
+<% if @acc_type == "admin" && current_user.nil? %>
+    <div class="flash error">You do not have permissions to access this page!</div>
+    <%= link_to "Back to Homepage", root_path %>
+<% elsif @acc_type == "admin" && current_user.account_type != "admin" %>
+    <div class="flash error">You do not have permissions to access this page!</div>
+    <%= link_to "Back to Posts Homepage", posts_path %>
+<% else%>
 
-<%= form_for(@user) do |f| %>
-  <%= render 'shared/error_messages', :object => f.object %>
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
+    <h1>Sign up</h1>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </div>
+    <%= form_for(@user) do |f| %>
+        <%= render 'shared/error_messages', :object => f.object %>
+        <div class="field">
+          <%= f.label :name %><br />
+          <%= f.text_field :name %>
+        </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password %>
-  </div>
+        <div class="field">
+          <%= f.label :email %><br />
+          <%= f.text_field :email %>
+        </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Re-enter Password" %><br />
-    <%= f.password_field :password_confirmation %>
-  </div>
+        <div class="field">
+          <%= f.label :password %><br />
+          <%= f.password_field :password %>
+        </div>
 
-  <div>
-    <% if User.find_all_by_account_type("admin").count == 0 %>
-      <%= radio_button_tag :user_type_from_button, "admin" %> Create an Admin Account
-    <% elsif @acc_type == "admin" %>
-      <%= hidden_field_tag :user_type_admin, "admin" %>
+        <div class="field">
+          <%= f.label :password_confirmation, "Re-enter Password" %><br />
+          <%= f.password_field :password_confirmation %>
+        </div>
+
+        <div>
+          <% if User.find_all_by_account_type("admin").count == 0 %>
+              <%= radio_button_tag :user_type_from_button, "admin" %> Create an Admin Account
+          <% elsif @acc_type == "admin" %>
+              <%= hidden_field_tag :user_type_admin, "admin" %>
+          <% end %>
+        </div>
+
+        <br />
+
+        <% if @acc_type == "admin" %>
+            <div class="actions">
+              <%= f.submit "Create Admin", :class => "main_signin" %>
+              <%= link_to "Cancel", posts_path, :class => "cancel_admin round" %>
+            </div>
+        <% else%>
+            <div class="actions">
+              <%= f.submit "Sign up", :class => "main_signin" %>
+              <%= link_to "Cancel", root_path, :class => "cancel_admin round" %>
+            </div>
+        <% end %>
     <% end %>
-  </div>
-
-  <br />
-
-  <% if @acc_type == "admin" %>
-    <div class="actions">
-      <%= f.submit "Create Admin" %>
-    </div>
-  <% else%>
-    <div class="actions">
-      <%= f.submit "Sign up" %>
-    </div>
-  <% end %>
 <% end %>

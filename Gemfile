@@ -11,7 +11,6 @@ gem 'therubyracer'
 
 
 group :development do
-  gem 'annotate', '2.4.0'
 end
 
 # Gems used only for assets and not required
@@ -35,5 +34,8 @@ gem 'jquery-rails'
 
 group :test do
   # Pretty printed test output
+  gem 'test-unit'
+  gem 'memory_test_fix'
+  gem 'capybara'
   gem 'turn', :require => false
 end

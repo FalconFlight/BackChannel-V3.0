@@ -3,7 +3,7 @@
 }
 
 body {
-  background: #cff;
+  background: #223f74;
 }
 
 header {
@@ -29,17 +29,17 @@ section h1 {
 /* Links */
 
 a {
-  color: #09c;
+  color: #1168a5;
   text-decoration: none;
 }
 
 a:hover {
-  color: #069;
+  color: #010101;
   text-decoration: underline;
 }
 
 a:visited {
-  color: #069;
+  /*color: #069;*/
 }
 
 /* Navigation */
@@ -117,7 +117,7 @@ a.signup_button {
   text-align: center;
   width: 190px;
   color: #fff;
-  background: #006400;
+  background: #058701;
   font-size: 150%;
   font-weight: bold;
   padding: 20px;
@@ -142,13 +142,146 @@ a.guest_browse {
   text-align: center;
   width: 230px;
   color: #fff;
-  background: #0066CC;
+  background: #a21424;
   font-size: 100%;
   font-weight: bold;
   padding: 1px;
   left: 201px;
   top: 125px;
   position: relative
+}
+
+.main_signin {
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+  text-align: center;
+  width: 130px;
+  color: #fff;
+  background: #3082e0;
+  font-size: 100%;
+  font-weight: bold;
+  padding: 4px;
+}
+
+a.hyperlink {
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+  text-align: center;
+  width: 270px;
+  color: #fff;
+  background: #3082e0;
+  font-size: 100%;
+  font-weight: bold;
+  padding: 5px;
+  left: 390px;
+  top: -60px;
+  position: relative
+}
+
+.newpost {
+  border: 2px solid #2c8fe4;
+  float: right;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  display: inline-block;
+  text-align: center;
+  width: 190px;
+  color: #fff;
+  background: #41c2f6;
+  font-size: 140%;
+  font-weight: bold;
+  padding: 2px;
+  left: 0px;
+  top: -205px;
+  position: relative
+}
+
+.cancel {
+  float: right;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  display: inline-block;
+  text-align: center;
+  width: 100px;
+  color: #fff;
+  background: #41c2f6;
+  font-size: 100%;
+  font-weight: bold;
+  padding: 2px;
+  left: 0px;
+  top: -40px;
+  position: relative
+}
+
+.accounts_cancel {
+  float: right;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  display: inline-block;
+  text-align: center;
+  width: 200px;
+  color: #fff;
+  background: #2ea7d8;
+  font-size: 100%;
+  font-weight: bold;
+  padding: 5px;
+  left: 0px;
+  top: -30px;
+  position: relative
+}
+
+.posts_cancel {
+  float: right;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  display: inline-block;
+  text-align: center;
+  width: 200px;
+  color: #fff;
+  background: #2ea7d8;
+  font-size: 100%;
+  font-weight: bold;
+  padding: 5px;
+  left: -450px;
+  top: -30px;
+  position: relative
+}
+
+.cancel_admin {
+  float: right;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  display: inline-block;
+  text-align: center;
+  width: 100px;
+  color: #fff;
+  background: #41c2f6;
+  font-size: 100%;
+  font-weight: bold;
+  padding: 2px;
+  left: -10px;
+  top: 8px;
+  position: relative
+}
+
+.submit_post {
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-block;
+  text-align: center;
+  width: 170px;
+  color: #fff;
+  background: #3082e0;
+  font-size: 120%;
+  font-weight: bold;
+  padding: 6px;
 }
 
 /* Admin account radio button label*/
@@ -214,22 +347,149 @@ div.field, div.actions {
 
 #error_explanation h2 {
     text-align: left;
-      font-weight: bold;
-        padding: 5px 5px 5px 15px;
-                   font-size: 12px;
-                     margin: -7px;
-                               background-color: #c00;
-                                 color: #fff;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    background-color: #c00;
+    color: #fff;
 }
 
 #error_explanation p {
     color: #333;
-             margin-bottom: 0;
-               padding: 5px;
+    margin-bottom: 0;
+    padding: 5px;
 }
 
 #error_explanation ul li {
     font-size: 12px;
-      list-style: square;
+    list-style: square;
 }
 
+/* POSTS */
+
+.votes{
+    float:left;
+    margin: 0px 5px 0px 0px;
+    padding: 2%;
+    color: #286dc1;
+    text-align:center;
+}
+
+
+.post_content{
+    overflow: auto;
+    font-weight: bold;
+
+}
+
+.author_time{
+    /*margin: 0px 5px 0px 0px;*/
+    /*padding: 2%;*/
+    /*float: left;*/
+    color: #868686;
+    /*text-align:left;*/
+}
+
+.reply_button_delete{
+    padding: 2px;
+    float: right;
+    display: inline-block;
+    width: 60px;
+    background: #e23933;
+    font-weight: bold;
+    font-size: 90%;
+    color: #fed6d7;
+    text-align:center;
+    left: -5px;
+    /*top: -55px;*/
+    bottom: 30px;
+    position: relative
+}
+
+.post_button_delete{
+    padding: 2px;
+    float: right;
+    display: inline-block;
+    width: 60px;
+    background: #e23933;
+    font-weight: bold;
+    font-size: 90%;
+    color: #f1e5e5;
+    text-align:center;
+    left: -5px;
+    /*top: -55px;*/
+    bottom: 60px;
+    position: relative
+}
+
+.post_button_reply{
+    padding: 2px;
+    float: right;
+    display: inline-block;
+    width: 60px;
+    background: #88cffe;
+    font-weight: bold;
+    font-size: 90%;
+    color: #205aa5;
+    text-align:center;
+    left: 60px;
+    top: -30px;
+    position: relative
+}
+
+.post_button_reply_no_delete{
+    padding: 2px;
+    float: right;
+    display: inline-block;
+    width: 60px;
+    background: #88cffe;
+    font-weight: bold;
+    font-size: 90%;
+    color: #205aa5;
+    text-align:center;
+    left: -05px;
+    top: -30px;
+    position: relative
+}
+
+
+.stale{	color: #999999;}
+.c4 {	border: 2px solid #888888; padding: 5px;}
+.c5 {	border: 2px solid #d9d9d9; padding: 5px;}
+.c6 {	border: 3px solid #223f74; padding: 15px;}
+.vc1 {	background: #88cffe;
+    border: 2px solid #0066aa;width:60px;}
+.vc2 {	background: #9df8fe;
+    border: 2px solid #1b8094;width:60px;}
+
+.reply_area{
+    font-family: Courier ;
+    font-size: 100%;
+}
+
+.all_replies {
+    text-indent: 3.0em;
+}
+
+.all_posts {
+    border: 3px solid #23245c;
+    padding: 3px;
+    background: #60d0fd;
+    font-size: 200%;
+    font-family: sans-serif;
+    color: #223f74;
+    font-weight: bold;
+    text-align: center;
+}
+
+.search {
+    color: #223f74;
+    font-weight: bold;
+    font-size: 100%;
+}
+
+.welcome{
+    font-weight: boldr;
+    font-size: 120%;
+}

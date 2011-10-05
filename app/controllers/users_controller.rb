@@ -4,13 +4,9 @@ class UsersController < ApplicationController
 
   def index
     @all_users = User.all(:order => 'users.total_votes DESC')
+    @title = "All Users"
   end
 
-
-  def show
-    @user  = User.find(params[:id])
-    @title = @user.name
-  end
 
   def new
     @user  = User.new
@@ -19,7 +15,7 @@ class UsersController < ApplicationController
     if(params[:user_type] == "guest")
       sign_in create_guest_user
       # save it in the cookie
-      flash[:success] = "Welcome to BackChannel App!"
+      flash[:info] = "Welcome to BackChannel App!"
       redirect_to posts_path and return
     else
       render 'new'
@@ -28,21 +24,19 @@ class UsersController < ApplicationController
 
 
   def create
-    flash[:success] = ""
 
     if params[:user_type_admin] == "admin"
       @admin_user = User.new(params[:user])
       @admin_user.account_type = "admin"
       @admin_user.total_votes  = 0
       if @admin_user.save
-        flash[:success] = "Successfully created Admin account."
+        flash[:info] = "Successfully created Admin account."
       else
         flash[:error] = "Could not create Admin account"
-      end      
+      end
+      @title = "All Users"
       redirect_to users_path and return
     end
-
-    flash[:success] += "Outside loop | "
 
     @user = User.new(params[:user])
     @user.total_votes = 0
@@ -55,7 +49,7 @@ class UsersController < ApplicationController
 
     if @user.save
       sign_in @user
-      flash[:success] += "Welcome to BackChannel App!"
+      flash[:info] = "Welcome to BackChannel App!"
       redirect_to posts_path
     else
       @title = "Sign up"
@@ -63,20 +57,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
-    @title = "Edit User"
-  end
-
-# Currently not implemented
-  def update
-    if @user.update_attributes(params[:user])
-      flash[:success] = "Profile Updated."
-      redirect_to user_path(@user)
-    else
-      @title = "Edit User"
-      render 'edit'
-    end
-  end
 
 
   def newadmin
@@ -118,7 +98,7 @@ class UsersController < ApplicationController
     end
 
     @user.destroy
-    flash[:success] = "User (and all his votes/posts has been destroyed"
+    flash[:info] = "User and all his votes/posts have been destroyed"
     redirect_to users_path
   end
 
