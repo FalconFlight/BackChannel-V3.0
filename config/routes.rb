@@ -1,7 +1,7 @@
 BackChannelV1::Application.routes.draw do
 
   resources :users
-  resources :sessions, :only => [:new, :create, :destroy]
+  resources :sessions, :only => [:new, :create, :destroy, :index]
   resources :posts#, :only => [:new, :create]
 
   match '/signup',   :to => 'users#new'
@@ -14,13 +14,7 @@ BackChannelV1::Application.routes.draw do
   match '/newadmin',    :to => 'users#newadmin'
   match '/removeuser',  :to => 'users#delete'
   match '/search',      :to => 'posts#search'
-
-  get "pages/home"
-  get "pages/contact"
-
-  match '/contact', :to => 'pages#contact'
-  match '/about',   :to => 'pages#about'
-  match '/help',    :to => 'pages#help'
+  match '/help',        :to => 'pages#help'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,5 +1,9 @@
 class SessionsController < ApplicationController
 
+  def index
+    render 'index'
+  end
+
   def new
     @title = "Sign in"
   end

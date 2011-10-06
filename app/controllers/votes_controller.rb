@@ -3,6 +3,11 @@ class VotesController < ApplicationController
   def new
     @post = Post.find(params[:postid_from_page]) # post to be voted
 
+    if(@post.nil?)
+      flash[:error] = "Cannot vote for this post!"
+      redirect_to posts_path and return
+    end
+
     # check if vote already exists in table
     local_vote = Vote.find_by_user_id_and_post_id(params[:userid_from_page], params[:postid_from_page])
 
@@ -24,7 +29,7 @@ class VotesController < ApplicationController
       @author = User.find(@post.user_id)
 
       if @vote.save
-        flash[:info] = "Vote Saved!"
+        flash.now[:info] = "Vote Saved!"
         @author.update_attribute :total_votes, @author.total_votes+1
       else
         flash[:error] = "Could not save Vote."

@@ -1,12 +1,13 @@
 require 'test_helper'
 
 class PostsControllerTest < ActionController::TestCase
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
+  fixtures :posts
+  fixtures :users
 
-  test "should use layout"
+  test "empty post must not be saved" do
+    post :create, post: { :content => ""}
+    assert_equal "Content cannot be empty!", flash[:error]
+  end
 
 
 end

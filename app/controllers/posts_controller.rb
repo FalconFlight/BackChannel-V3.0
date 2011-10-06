@@ -21,10 +21,16 @@ class PostsController < ApplicationController
 
   def create
     @title = "All Posts"
+
+    if params[:post][:content].empty?
+      flash[:error] = "Content cannot be empty!"
+      redirect_to posts_path and return
+    end
+
     @post = Post.new
     @post = current_user.posts.build(params[:post])
     @post.parent = params[:parentid]
-  
+
     if(@post.parent == -1)
       @post.weight = Post.find_all_by_parent(-1).count
     else
@@ -32,7 +38,7 @@ class PostsController < ApplicationController
     end
 
     if @post.save
-      flash[:info] = "Successfully Posted!"
+      flash[:info]  = "Successfully Posted!"
     else
       flash[:error] = "Unsuccessful attempt. Try Again."
     end
@@ -60,7 +66,7 @@ class PostsController < ApplicationController
       r.destroy
     end
 
-    flash[:info] = "Post Deleted!"
+    flash.now[:info] = "Post Deleted!"
     @post.destroy
     render 'index'
   end

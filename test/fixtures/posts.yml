@@ -1,19 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
-  content: MyString
+  id: 1
+  content: PostContent1
   user_id: 1
-  parent: 1
+  parent: -1
 
 
 two:
-  content: MyString
-  user_id: 1
+  id: 2
+  content: PostContent2
+  user_id: 2
   parent: 1
-
-<% (3..100).each do |i| %>
-fix_<%= i %>:
-  content: MyString_<%= i %>
-  user_id: <%= i %>
-  parent:<%= i %>
-<% end %>

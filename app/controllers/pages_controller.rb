@@ -1,18 +1,7 @@
-class PagesController < ApplicationController
-  def home
-    @title = "Home"
-  end
-
-  def contact
-    @title = "Contact"    
-  end
-
-  def about
-    @title = "About"
-  end
+class UsersController < ApplicationController
 
   def help
-    @title = "Help"
+    render 'help'
   end
 
 end

@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   def index
     @all_users = User.all(:order => 'users.total_votes DESC')
     @title = "All Users"
+    flash.now[:info] = "This is privileged information to be viewed by Admin only!"
   end
 
 
@@ -15,7 +16,7 @@ class UsersController < ApplicationController
     if(params[:user_type] == "guest")
       sign_in create_guest_user
       # save it in the cookie
-      flash[:info] = "Welcome to BackChannel App!"
+      flash[:info] = "Welcome to the BackChannel App!"
       redirect_to posts_path and return
     else
       render 'new'
