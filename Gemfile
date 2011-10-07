@@ -8,7 +8,7 @@ gem 'rails', '3.1.0'
 gem 'sqlite3'
 gem 'execjs'
 gem 'therubyracer'
-
+gem 'pg'
 
 group :development do
 end
